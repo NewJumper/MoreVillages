@@ -1,5 +1,6 @@
 package com.newjumper.morevillages;
 
+import com.newjumper.morevillages.datagen.MoreVillagesLootTableProvider;
 import com.newjumper.morevillages.datagen.VillageBiomeTagsProvider;
 import com.newjumper.morevillages.datagen.VillageWorldGeneration;
 import net.minecraft.data.DataGenerator;
@@ -25,6 +26,7 @@ public class MoreVillages {
         DataGenerator generator = event.getGenerator();
         PackOutput packOutput = generator.getPackOutput();
 
+        generator.addProvider(event.includeServer(), new MoreVillagesLootTableProvider(packOutput));
         generator.addProvider(event.includeServer(), new VillageBiomeTagsProvider(packOutput, event.getLookupProvider(), event.getExistingFileHelper()));
         generator.addProvider(event.includeServer(), new VillageWorldGeneration(packOutput, event.getLookupProvider()));
     }
