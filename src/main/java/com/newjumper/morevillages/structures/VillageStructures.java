@@ -5,7 +5,7 @@ import com.newjumper.morevillages.structures.pools.JungleVillagePools;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
@@ -21,9 +21,9 @@ import net.minecraft.world.level.levelgen.structure.structures.JigsawStructure;
 import java.util.Map;
 
 public class VillageStructures {
-    public static final ResourceKey<Structure> VILLAGE_JUNGLE = createKey("village_jungle");
+    public static final ResourceKey<Structure> VILLAGE_JUNGLE = key("village_jungle");
 
-    public static void bootstrap(BootstapContext<Structure> context) {
+    public static void bootstrap(BootstrapContext<Structure> context) {
         HolderGetter<Biome> biomes = context.lookup(Registries.BIOME);
         HolderGetter<StructureTemplatePool> pools = context.lookup(Registries.TEMPLATE_POOL);
 
@@ -34,7 +34,7 @@ public class VillageStructures {
         return new Structure.StructureSettings(biomes, Map.of(), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN);
     }
 
-    private static ResourceKey<Structure> createKey(String name) {
-        return ResourceKey.create(Registries.STRUCTURE, new ResourceLocation(MoreVillages.MOD_ID, name));
+    private static ResourceKey<Structure> key(String name) {
+        return ResourceKey.create(Registries.STRUCTURE, ResourceLocation.fromNamespaceAndPath(MoreVillages.MOD_ID, name));
     }
 }
