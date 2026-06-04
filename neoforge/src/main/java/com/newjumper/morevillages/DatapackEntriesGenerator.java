@@ -12,6 +12,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class DatapackEntriesGenerator extends DatapackBuiltinEntriesProvider {
     public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
+            .add(Registries.PROCESSOR_LIST, VillageProcessorLists::bootstrap)
             .add(Registries.STRUCTURE, VillageStructures::bootstrap)
             .add(Registries.STRUCTURE_SET, VillageStructureSets::bootstrap)
             .add(Registries.TEMPLATE_POOL, JungleVillagePools::bootstrap);

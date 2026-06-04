@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Either;
 import com.mojang.datafixers.util.Pair;
 import com.newjumper.morevillages.MoreVillages;
+import com.newjumper.morevillages.VillageProcessorLists;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -28,7 +29,10 @@ public class JungleVillagePools {
     public static void bootstrap(BootstrapContext<StructureTemplatePool> context) {
         HolderGetter<StructureTemplatePool> pools = context.lookup(Registries.TEMPLATE_POOL);
         Holder<StructureTemplatePool> empty = pools.getOrThrow(Pools.EMPTY);
-        Holder<StructureProcessorList> mossy = context.lookup(Registries.PROCESSOR_LIST).getOrThrow(ProcessorLists.MOSSIFY_20_PERCENT);
+
+        HolderGetter<StructureProcessorList> processors = context.lookup(Registries.PROCESSOR_LIST);
+        Holder<StructureProcessorList> mossy = processors.getOrThrow(ProcessorLists.MOSSIFY_20_PERCENT);
+        Holder<StructureProcessorList> street = processors.getOrThrow(VillageProcessorLists.STREET_JUNGLE);
 
         context.register(
                 START,
@@ -48,22 +52,22 @@ public class JungleVillagePools {
                 new StructureTemplatePool(
                         empty,
                         ImmutableList.of(
-                                single("streets/corner_1", 2),
-                                single("streets/corner_2", 2),
-                                single("streets/corner_3", 2),
-                                single("streets/crossroad_1", 2),
-                                single("streets/crossroad_2", 1),
-                                single("streets/crossroad_3", 2),
-                                single("streets/crossroad_4", 2),
-                                single("streets/crossroad_5", 2),
-                                single("streets/crossroad_6", 2),
-                                single("streets/straight_1", 4),
-                                single("streets/straight_2", 4),
-                                single("streets/straight_3", 7),
-                                single("streets/straight_4", 7),
-                                single("streets/straight_5", 3),
-                                single("streets/straight_6", 4),
-                                single("streets/turn_1", 3)
+                                single("streets/corner_1", street, 2),
+                                single("streets/corner_2", street, 2),
+                                single("streets/corner_3", street, 2),
+                                single("streets/crossroad_1", street, 2),
+                                single("streets/crossroad_2", street, 1),
+                                single("streets/crossroad_3", street, 2),
+                                single("streets/crossroad_4", street, 2),
+                                single("streets/crossroad_5", street, 2),
+                                single("streets/crossroad_6", street, 2),
+                                single("streets/straight_1", street, 4),
+                                single("streets/straight_2", street, 4),
+                                single("streets/straight_3", street, 7),
+                                single("streets/straight_4", street, 7),
+                                single("streets/straight_5", street, 3),
+                                single("streets/straight_6", street, 4),
+                                single("streets/turn_1", street, 3)
                         ),
                         StructureTemplatePool.Projection.TERRAIN_MATCHING
                 )
